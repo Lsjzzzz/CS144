@@ -33,6 +33,7 @@ class TCPSender {
     uint64_t _next_seqno{0};
 
     std::queue<TCPSegment> _segments_outstanding{};
+    
     size_t _recv_ackno = 0;
     bool _syn_flag = false;
     bool _fin_flag = false;

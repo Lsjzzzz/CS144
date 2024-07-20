@@ -37,7 +37,7 @@ void TCPSender::fill_window() {
     }
 
     // take window_size as 1 when it equal 0
-    // 新跳包  如果接收方窗口满了 你这里也是0 不发送东西的话,
+    // 心跳包  如果接收方窗口满了 你这里也是0 不发送东西的话,
     // 那么接收方永远不会发送ack 就卡死了 所以必须发送一字节的内容
     if (_window_size == 0) {
         _window_size = 1;

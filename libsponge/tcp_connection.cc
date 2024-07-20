@@ -110,7 +110,7 @@ void TCPConnection::tick(const size_t ms_since_last_tick) {
     }
 
     _sender.tick(ms_since_last_tick);
-    fill_window();  // 感觉没必要啊
+    fill_window();
     _time_since_last_segment_received_ms += ms_since_last_tick;
 
     if (_sender.consecutive_retransmissions() > _cfg.MAX_RETX_ATTEMPTS) {

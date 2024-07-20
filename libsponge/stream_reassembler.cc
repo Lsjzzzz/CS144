@@ -8,7 +8,7 @@
 // You will need to add private members to the class declaration in `stream_reassembler.hh`
 
 template <typename... Targs>
-void DUMMY_CODE(Targs &&... /* unused */) {}
+void DUMMY_CODE(Targs &&.../* unused */) {}
 
 using namespace std;
 
@@ -37,22 +37,16 @@ size_t StreamReassembler::merge_block(block &new_block, const block &old) {
 //! contiguous substrings and writes them into the output stream in order.
 void StreamReassembler::push_substring(const string &data, const size_t index, const bool eof) {
     if (index >= head_index + _capacity)
-        return;  // 发送太后面的数据; asd asd
+        return;  // 发送太后面的数据;
+
+    if (index + data.length() <= head_index)  // 发送已经读过的旧的
+    {
+        return;
+    }
 
     block new_block;
-    if (index + data.length() <= head_index)  // 发送已经读过的旧的   // 旧的应该不用判断eof吧?  他们都判断了
-    {
-        if (data.length() == 0 && index == head_index) {  // 接收到空数据的第一块是eof
-            if (eof) {
-                eof_flag = true;
-            }
 
-            if (eof_flag && empty()) {
-                _output.end_input();
-            }
-        }
-        return;
-    } else if (index < head_index)  // 有新有旧
+    if (index < head_index)  // 有新有旧
     {
         new_block.data.assign(data.begin() + head_index - index, data.end());
         new_block.length = new_block.data.length();

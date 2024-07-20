@@ -39,7 +39,7 @@ void NetworkInterface::send_datagram(const InternetDatagram &dgram, const Addres
     if (it != _arp_table.end()) {
         EthernetFrame frame;
         frame.header().dst = it->second.ethernet_address;
-        frame.header().src = _ethernet_address;
+        frame.header().src = _ethernet_address; 
         frame.header().type = EthernetHeader::TYPE_IPv4;
         frame.payload() = dgram.serialize();
 
