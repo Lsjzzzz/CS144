@@ -26,6 +26,7 @@ class ByteStream {
     size_t _size;
 
     std::string _buf;
+    
     unsigned _read_bytes;
     unsigned _write_bytes;
     bool _end_input;

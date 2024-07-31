@@ -66,7 +66,7 @@ void TCPConnection::segment_received(const TCPSegment &seg) {
     _sender.fill_window();
     fill_window();
 
-    // 如果收到的不是 空seg 并且没有消息发送 必须要发送一个空seg
+    // 如果收到的不是空seg 并且没有消息发送   必须要发送一个空seg
     if (seg.length_in_sequence_space() > 0 && _segments_out.empty()) {
         _sender.send_empty_segment();
         fill_window();
